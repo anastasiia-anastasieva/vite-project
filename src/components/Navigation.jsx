@@ -1,7 +1,7 @@
 import DanyaGeelyMK from "../assets/geely.jpg";
 import React from "react";
 
-function Navigatoin () {
+function Navigation () {
     return (
         <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
             <div className="container-fluid">
@@ -34,4 +34,4 @@ function Navigatoin () {
     );
 }
 
-export default Navigatoin;
+export default Navigation;

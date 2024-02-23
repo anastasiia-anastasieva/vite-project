@@ -1,0 +1,32 @@
+[
+  {
+      "name": "Dmytro",
+      "absences": 25,
+      "city": "Tyshkivka"
+    },
+    {
+      "name": "Danya",
+      "absences": 29,
+      "city": "Mykolaivka"
+    },
+    {
+      "name": "Vlad",
+      "absences": 30,
+      "city": "Shkolne"
+    },
+    {
+      "name": "Nastya",
+      "absences": 100,
+      "city": "Shkolne"
+    },
+  {
+    "name": "Nastya",
+    "absences": 100,
+    "city": "Shkolne"
+  },
+  {
+    "name": "Nastya",
+    "absences": 100,
+    "city": "Shkolne"
+  }
+]
