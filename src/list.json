@@ -1,30 +1,36 @@
 [
   {
-      "name": "Dmytro",
-      "absences": 25,
-      "city": "Tyshkivka"
-    },
-    {
-      "name": "Danya",
-      "absences": 29,
-      "city": "Mykolaivka"
-    },
-    {
-      "name": "Vlad",
-      "absences": 30,
-      "city": "Shkolne"
-    },
-    {
-      "name": "Nastya",
-      "absences": 100,
-      "city": "Shkolne"
-    },
+    "id": "1",
+    "name": "Dmytro",
+    "absences": 25,
+    "city": "Tyshkivka"
+  },
   {
+    "id": "2",
+    "name": "Danya",
+    "absences": 29,
+    "city": "Mykolaivka"
+  },
+  {
+    "id": "3",
+    "name": "Vlad",
+    "absences": 30,
+    "city": "Shkolne"
+  },
+  {
+    "id": "4",
+    "name": "Nastya",
+    "absences": 100,
+    "city": "Shkolne"
+  },
+  {
+    "id": "5",
     "name": "Anastasiia",
     "absences": 120,
     "city": "Shkolne"
   },
   {
+    "id": "6",
     "name": "Danil",
     "absences": 0,
     "city": "Shkolne"
