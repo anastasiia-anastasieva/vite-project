@@ -1,10 +1,13 @@
-import DanyaGeelyMK from "../assets/geely.jpg";
+import DanyaGeelyMK from "../../assets/geely.jpg";
 import { NavLink, Outlet } from "react-router-dom";
 import React from "react";
-import NavHistory from "./NavHistory.jsx";
-import "../main.css"; // Імпортуємо файли стилів для компонента Navigation
+import NavHistory from "../NavHistory.jsx";
+import "../../main.css";// Імпортуємо файли стилів для компонента Navigation
+import { useAuthStatus } from '../../hooks/useAuthStatus';
+
 
 function Navigation() {
+    const { loggedIn } = useAuthStatus();
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
@@ -35,6 +38,23 @@ function Navigation() {
                             <NavLink to="/gallery" className="nav-link" activeClassName="active">Gallery</NavLink>
                         </li>
                     </ul>
+                    <ul className="navbar-nav">
+                        {!loggedIn ? (
+                            <>
+                                <li className="nav-item">
+                                    <NavLink to="/login" className="nav-link" activeClassName="active">Login</NavLink>
+                                </li>
+                                <li className="nav-item">
+                                    <NavLink to="/registration" className="nav-link"
+                                             activeClassName="active">Register</NavLink>
+                                </li>
+                            </>
+                        ) : (
+                            <li className="nav-item">
+                                <NavLink to="/logout" className="nav-link" activeClassName="active">Logout</NavLink>
+                            </li>
+                        )}
+                    </ul>
                     <form className="d-flex">
                         <input className="form-control me-2" type="search" placeholder="Search"
                                aria-label="Search"/>
@@ -42,8 +62,8 @@ function Navigation() {
                     </form>
                 </div>
             </div>
-            <Outlet />
-            <NavHistory />
+            <Outlet/>
+            <NavHistory/>
         </nav>
     );
 }

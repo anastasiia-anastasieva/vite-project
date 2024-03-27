@@ -5,10 +5,13 @@
   "homepage": "https://anastasiia-anastasieva.github.io/vite-project/",
   "type": "module",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build:firebase",
+    "deploy": "firebase deploy",
+    "deploy:gh": "npm run build: gh-pages && gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
+    "build:gh-pages": "cross-env DEPLOY_ENV=GH_PAGES vite build",
+    "build:firebase": "cross-env DEPLOY_ENV=FIREBASE vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -18,6 +21,7 @@
     "@mui/icons-material": "^5.15.10",
     "@mui/material": "^5.15.10",
     "bootstrap": "^5.3.2",
+    "firebase": "^10.8.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.1",
