@@ -1,5 +1,8 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import StudentsData from '../list.json';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import IconButton from '@mui/material/IconButton';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Select from '@mui/material/Select';
@@ -12,10 +15,40 @@ import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
+import {decrementLikes, incrementLikes} from "../store/actions/likesActions.js";
+import {useDispatch} from "react-redux";
 
 function List() {
 
     const [Students, setStudents] = useState(StudentsData);
+
+    useEffect(() => {
+        // Додавання поля isFavorited до кожного студента
+        const initializedData = StudentsData.map(student => ({
+            ...student,
+            isFavorited: false,
+        }));
+        setStudents(initializedData);
+    }, []);
+
+    const dispatch = useDispatch();
+
+    const toggleFavorite = (index) => {
+        const newStudents = [...Students];
+        // Запам'ятовуємо поточний стан isFavorited перед зміною
+        const wasFavorited = newStudents[index].isFavorited;
+        newStudents[index].isFavorited = !wasFavorited;
+        setStudents(newStudents);
+        // Диспатчимо дію в залежності від поточного стану лайка
+        if (wasFavorited) {
+            // Якщо студент вже мав лайк, зменшуємо кількість лайків
+            dispatch(decrementLikes());
+        } else {
+            // Якщо студент не мав лайка, збільшуємо кількість лайків
+            dispatch(incrementLikes());
+        }
+    };
+
     const [selectedCity, setSelectedCity] = useState('');
     const [sortDirection, setSortDirection] = useState(null); // 'up', 'down', null
     const [filterName, setFilterName] = useState('');
@@ -71,7 +104,7 @@ function List() {
     const sortedFilteredStudents = getSortedFilteredStudents();
 
     return (
-        <Box sx={{ padding: 2 }}>
+        <Box sx={{padding: 2}}>
             <Grid container spacing={2} alignItems="center">
                 <Grid item xs={12} sm={4}>
                     <FormControl fullWidth>
@@ -101,24 +134,24 @@ function List() {
                 </Grid>
                 <Grid item xs={12} sm={4}>
                     <Button onClick={() => handleSort('down')}>
-                        <ArrowDownwardIcon />
+                        <ArrowDownwardIcon/>
                     </Button>
                     <Button onClick={() => handleSort('up')}>
-                        <ArrowUpwardIcon />
+                        <ArrowUpwardIcon/>
                     </Button>
                     <Button onClick={() => handleSort(null)}>
-                        <HighlightOffIcon />
+                        <HighlightOffIcon/>
                     </Button>
                     <Button onClick={toggleDragMode}>
-                        <SwapVertIcon color={isDragEnabled ? "success" : "inherit"} />
+                        <SwapVertIcon color={isDragEnabled ? "success" : "inherit"}/>
                     </Button>
                 </Grid>
             </Grid>
 
-            <Box sx={{ marginTop: 2 }}>
+            <Box sx={{marginTop: 2}}>
                 {sortedFilteredStudents.map((student, index) => (
                     <Box key={index}
-                         sx={{ padding: 2, border: '1px solid black', marginBottom: 1 }}
+                         sx={{padding: 2, border: '1px solid black', marginBottom: 1}}
                          draggable={isDragEnabled}
                          onDragStart={() => handleDragStart(index)}
                          onDragOver={handleDragOver}
@@ -126,6 +159,9 @@ function List() {
                         <p>{student.name}</p>
                         <p>{student.absences}</p>
                         <p>{student.city}</p>
+                        <IconButton onClick={() => toggleFavorite(index)}>
+                            {student.isFavorited ? <FavoriteIcon color="error"/> : <FavoriteBorderIcon/>}
+                        </IconButton>
                     </Box>
                 ))}
             </Box>

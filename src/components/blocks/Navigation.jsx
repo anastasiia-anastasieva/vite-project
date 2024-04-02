@@ -1,3 +1,6 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { incrementLikes, decrementLikes } from '../../store/actions/likesActions';
+
 import DanyaGeelyMK from "../../assets/geely.jpg";
 import { NavLink, Outlet } from "react-router-dom";
 import React from "react";
@@ -5,9 +8,16 @@ import NavHistory from "../NavHistory.jsx";
 import "../../main.css";// Імпортуємо файли стилів для компонента Navigation
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 
+import { Typography, Box } from '@mui/material';
+
 
 function Navigation() {
     const { loggedIn } = useAuthStatus();
+    // Використовуйте useDispatch, щоб отримати метод для відправки actions
+    const dispatch = useDispatch();
+    // Використовуйте useSelector, щоб отримати стан лічильника лайків з Redux store
+    const likesCount = useSelector(state => state.likes.count);
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
@@ -62,6 +72,11 @@ function Navigation() {
                     </form>
                 </div>
             </div>
+
+            <Box className="likes-container" sx={{ color: 'white', display: 'flex', alignItems: 'center' }}>
+                <Typography variant="body1">Likes: {likesCount}</Typography>
+            </Box>
+
             <Outlet/>
             <NavHistory/>
         </nav>
