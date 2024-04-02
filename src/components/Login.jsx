@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../fb-conf.js';
+import { Box, useTheme } from '@mui/material';
 
 function Login() {
+    const theme = useTheme();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -26,6 +28,14 @@ function Login() {
     };
 
     return (
+        <Box
+            sx={{
+                bgcolor: 'background.default', // Встановлення кольору фону з поточної теми
+                color: 'text.primary', // Встановлення кольору тексту з поточної теми
+                minHeight: '100vh', // Висота контейнера, щоб він заповнював весь екран
+                padding: theme.spacing(3) // Використання відступів з поточної теми
+            }}
+        >
         <div>
             <input
                 type="email"
@@ -40,6 +50,7 @@ function Login() {
             <button onClick={handleLogin}>Login with Email</button>
             <button onClick={handleGoogleLogin}>Login with Google</button>
         </div>
+        </Box>
     );
 }
 

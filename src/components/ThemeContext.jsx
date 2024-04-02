@@ -1,22 +1,32 @@
-import { useState, createContext } from 'react';
-import PropTypes from "prop-types";
+import React, { createContext, useContext, useState } from 'react';
+import { createTheme, ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
 
-export const ThemeContext = createContext();
 
-export const ThemeProvider = ({ children }) => {
-    const [lightMode, setStyle] = useState( true);
 
-    const changeStyle = () => {
-        setStyle(!lightMode);
+const ThemeContext = createContext();
+
+export const useThemeContext = () => useContext(ThemeContext);
+
+const ThemeProvider = ({ children }) => {
+    const [mode, setMode] = useState('light');
+
+    const theme = createTheme({
+        palette: {
+            mode,
+        },
+    });
+
+    const toggleTheme = () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
     };
 
     return (
-        <ThemeContext.Provider value={{ lightMode, changeStyle }}>
-            {children}
+        <ThemeContext.Provider value={{ toggleTheme }}>
+            <MUIThemeProvider theme={theme}>
+                {children}
+            </MUIThemeProvider>
         </ThemeContext.Provider>
     );
 };
 
-ThemeProvider.propTypes = {
-    children: PropTypes.node.isRequired
-};
+export default ThemeProvider;

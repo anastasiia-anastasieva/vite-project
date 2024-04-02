@@ -2,6 +2,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React from "react";
 import Slider from "react-slick";
+import {Box, useTheme} from "@mui/material";
 
 const Gallery = () => {
     const settings = {
@@ -11,8 +12,17 @@ const Gallery = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
     };
+    const theme = useTheme();
 
     return (
+        <Box
+            sx={{
+                bgcolor: 'background.default', // Встановлення кольору фону з поточної теми
+                color: 'text.primary', // Встановлення кольору тексту з поточної теми
+                minHeight: '100vh', // Висота контейнера, щоб він заповнював весь екран
+                padding: theme.spacing(3) // Використання відступів з поточної теми
+            }}
+        >
         <div className="slider-container">
             <h1>Gallery</h1>
             <Slider {...settings}>
@@ -36,6 +46,7 @@ const Gallery = () => {
                 </div>
             </Slider>
         </div>
+        </Box>
     );
 }
 

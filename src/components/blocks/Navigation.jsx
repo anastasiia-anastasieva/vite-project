@@ -9,6 +9,7 @@ import "../../main.css";// Імпортуємо файли стилів для �
 import { useAuthStatus } from '../../hooks/useAuthStatus';
 
 import { Typography, Box } from '@mui/material';
+import {useThemeContext} from "../ThemeContext.jsx";
 
 
 function Navigation() {
@@ -17,6 +18,8 @@ function Navigation() {
     const dispatch = useDispatch();
     // Використовуйте useSelector, щоб отримати стан лічильника лайків з Redux store
     const likesCount = useSelector(state => state.likes.count);
+
+    const { toggleTheme } = useThemeContext();
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -46,6 +49,9 @@ function Navigation() {
                         </li>
                         <li className="nav-item">
                             <NavLink to="/gallery" className="nav-link" activeClassName="active">Gallery</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <button className="btn btn-outline-light" onClick={toggleTheme}>Toggle Theme</button>
                         </li>
                     </ul>
                     <ul className="navbar-nav">
