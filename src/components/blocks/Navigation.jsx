@@ -39,6 +39,9 @@ function Navigation() {
                                      aria-current="page">Home</NavLink>
                         </li>
                         <li className="nav-item">
+                            <NavLink to="/currency" className="nav-link" activeClassName="active">Currency</NavLink>
+                        </li>
+                        <li className="nav-item">
                             <NavLink to="/about" className="nav-link" activeClassName="active">About</NavLink>
                         </li>
                         <li className="nav-item">

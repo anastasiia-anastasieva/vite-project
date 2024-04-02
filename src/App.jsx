@@ -12,6 +12,7 @@ import Registration from "./components/Registration.jsx";
 import Logout from "./components/Logout.jsx";
 import PublicRoute from "./components/PublicRoute.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
+import CurrencyRates from './components/CurrencyRates';
 
 
 // import ThemeContext from "./ThemeContext";
@@ -37,6 +38,7 @@ function App() {
                             </ PrivateRoute >
                         } />
 
+                    <Route path="/currency" element={<CurrencyRates />} />
                     <Route path="/about" element={<About/>} />
                     <Route path="/services" element={<Services />} />
 
